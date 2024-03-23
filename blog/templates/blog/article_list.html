@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h1>Статьи</h1>
+    <div class="row mt-4">
+        {% for article in articles %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text flex-grow-1">{{ article.description|truncatewords:20 }}</p>
+                        <div class="mt-auto">
+                            <div class="btn-group">
+                                <a href="{% url 'article_detail' article.id %}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                            </div>
+                            <small class="text-muted mt-2">Автор: {{ article.author }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Записей ещё нет.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
